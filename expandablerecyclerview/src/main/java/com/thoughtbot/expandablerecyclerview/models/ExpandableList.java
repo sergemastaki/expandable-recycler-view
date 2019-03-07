@@ -31,9 +31,12 @@ public class ExpandableList {
    * @param group the index of the {@link ExpandableGroup} in the full collection {@link #groups}
    * @return the number of visible row items for the particular group. If the group is collapsed,
    * return 1 for the group header. If the group is expanded return total number of children in the
-   * group + 1 for the group header
+   * group + 1 for the group header. If there is no group (empty list), return 0.
    */
   private int numberOfVisibleItemsInGroup(int group) {
+    if (expandedGroupIndexes.length() == 0) {
+      return 0;
+    }
     if (expandedGroupIndexes[group]) {
       return groups.get(group).getItemCount() + 1;
     } else {
